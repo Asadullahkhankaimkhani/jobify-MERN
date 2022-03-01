@@ -1,10 +1,11 @@
 import React from "react";
 import logo from "../assets/images/logo.svg";
 import main from "../assets/images/main.svg";
+import Wrapper from "../assets/wrappers/LandingPage";
 
 const Landing = () => {
   return (
-    <main>
+    <Wrapper>
       <nav>
         <img src={logo} alt="jobify" className="logo" />
       </nav>
@@ -13,17 +14,19 @@ const Landing = () => {
           <h1>
             Job <span>tracking</span>app
           </h1>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia
+            aut delectus praesentium hic, earum cupiditate consequuntur adipisci
+            voluptatum. Amet sed cupiditate vel at? Placeat dolore iure cumque
+            sint, accusantium est.
+          </p>
+
+          <button className="btn btn-hero">Login/Register</button>
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Mollitia aut
-          delectus praesentium hic, earum cupiditate consequuntur adipisci
-          voluptatum. Amet sed cupiditate vel at? Placeat dolore iure cumque
-          sint, accusantium est.
-        </p>
-        <button className="btn btn-hero">Login/Register</button>
+
+        <img src={main} alt="jon hunt" className="img main-img" />
       </div>
-      <img src={main} alt="jon hunt" className="img main-img" />
-    </main>
+    </Wrapper>
   );
 };
 
