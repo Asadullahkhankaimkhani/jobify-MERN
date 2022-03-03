@@ -1,4 +1,5 @@
 import { useContext, useReducer, createContext } from "react";
+import { DISPLAY_ALERT } from "./actions";
 import reducer from "./reducers";
 
 const initialState = {
@@ -13,8 +14,14 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const displaYAlert = () => {
+    dispatch({ type: DISPLAY_ALERT });
+  };
+
   return (
-    <AppContext.Provider value={{ ...state }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ ...state, displaYAlert }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 
