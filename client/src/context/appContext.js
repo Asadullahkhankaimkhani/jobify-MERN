@@ -14,12 +14,12 @@ const AppContext = createContext();
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const displaYAlert = () => {
+  const displayAlert = () => {
     dispatch({ type: DISPLAY_ALERT });
   };
 
   return (
-    <AppContext.Provider value={{ ...state, displaYAlert }}>
+    <AppContext.Provider value={{ ...state, displayAlert }}>
       {children}
     </AppContext.Provider>
   );

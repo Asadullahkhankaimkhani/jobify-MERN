@@ -8,35 +8,40 @@ const initialState = {
   name: "",
   email: "",
   password: "",
-  isMemeber: true,
+  isMember: true,
 };
 
 const Register = () => {
   const [values, setValues] = useState(initialState);
 
-  const { showAlert } = useAppContext();
+  const { showAlert, displayAlert } = useAppContext();
 
-  console.log(showAlert);
-  const { name, email, password, isMemeber } = values;
+  const { name, email, password, isMember } = values;
 
-  const handleChange = (e) => console.log(e.target);
+  const handleChange = (e) =>
+    setValues({ ...values, [e.target.name]: e.target.value });
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!email || !password || (!isMember && !name)) {
+      displayAlert();
+      return;
+    }
+    console.log(values);
   };
 
   const toggleMember = () => {
-    setValues({ ...values, isMemeber: !isMemeber });
+    setValues({ ...values, isMember: !isMember });
   };
 
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={handleSubmit}>
         <Logo />
-        <h3>{isMemeber ? "Login" : "Register"}</h3>
+        <h3>{isMember ? "Login" : "Register"}</h3>
         {showAlert && <Alert />}
         {/* name Input */}
-        {!isMemeber && (
+        {!isMember && (
           <FormRow
             type="text"
             name="name"
@@ -60,10 +65,10 @@ const Register = () => {
         />
         <button className="btn btn-block">Submit</button>
         <p>
-          {isMemeber ? "not a member?" : "already a member?"}
+          {isMember ? "not a member?" : "already a member?"}
 
-          <button className="member-btn" onClick={toggleMember}>
-            {isMemeber ? "Register" : "Login"}
+          <button type="button" className="member-btn" onClick={toggleMember}>
+            {isMember ? "Register" : "Login"}
           </button>
         </p>
       </form>
