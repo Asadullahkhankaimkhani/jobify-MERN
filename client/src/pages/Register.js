@@ -1,6 +1,8 @@
 import { Logo, FormRow } from "../components";
 import Wrapper from "../assets/wrappers/RegisterPage";
 import { useState } from "react";
+import { useAppContext } from "../context/appContext";
+import { Alert } from "../components";
 
 const initialState = {
   name: "",
@@ -12,6 +14,9 @@ const initialState = {
 const Register = () => {
   const [values, setValues] = useState(initialState);
 
+  const { showAlert } = useAppContext();
+
+  console.log(showAlert);
   const { name, email, password, isMemeber } = values;
 
   const handleChange = (e) => console.log(e.target);
@@ -29,6 +34,7 @@ const Register = () => {
       <form className="form" onSubmit={handleSubmit}>
         <Logo />
         <h3>{isMemeber ? "Login" : "Register"}</h3>
+        {showAlert && <Alert />}
         {/* name Input */}
         {!isMemeber && (
           <FormRow
