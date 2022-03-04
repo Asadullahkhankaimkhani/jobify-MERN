@@ -9,6 +9,7 @@ import { dbConnection } from "./db/connect.js";
 
 // Routes
 import authRoute from "./routes/authRoute.js";
+import jobRoute from "./routes/authRoute.js";
 
 dotenv.config();
 const app = express();
@@ -23,6 +24,7 @@ app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);
 
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/job", jobRoute);
 
 dbConnection(process.env.MONGO_URL);
 
