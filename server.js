@@ -7,8 +7,13 @@ import notFoundMiddleware from "./middleware/not-found.js";
 // Database Function
 import { dbConnection } from "./db/connect.js";
 
+// Routes
+import authRoute from "./routes/authRoute.js";
+
 dotenv.config();
 const app = express();
+
+app.use(express.json());
 
 app.get("/", (req, res) => {
   res.send("Welcome Express");
@@ -16,6 +21,8 @@ app.get("/", (req, res) => {
 
 app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);
+
+app.use("/api/v1/auth", authRoute);
 
 dbConnection(process.env.MONGO_URL);
 
