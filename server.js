@@ -1,5 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
+import morgan from "morgan";
 
 // Middleware
 import errorHandleMiddleware from "./middleware/error-handling.js";
@@ -16,16 +17,17 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
   res.send("Welcome Express");
 });
 
-app.use(notFoundMiddleware);
-app.use(errorHandleMiddleware);
-
 app.use("/api/v1/auth", authRoute);
 app.use("/api/v1/job", jobRoute);
+
+app.use(notFoundMiddleware);
+app.use(errorHandleMiddleware);
 
 dbConnection(process.env.MONGO_URL);
 

@@ -1,11 +1,18 @@
+import User from "../models/User.js";
+
 export const register = async (req, res) => {
-  console.log("Register Endpoint");
+  try {
+    const user = await User.create(req.body);
+    res.status(201).json({ user });
+  } catch (err) {
+    res.status(500).json({ msg: "there was an error" });
+  }
 };
 
 export const login = async (req, res) => {
-  console.log("Login Endpoint");
+  res.send("Login Endpoint");
 };
 
 export const updateUser = async (req, res) => {
-  console.log("userUpdate Endpoint");
+  res.send("userUpdate Endpoint");
 };

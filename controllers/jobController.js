@@ -1,19 +1,19 @@
 export const createJob = async (req, res) => {
-  console.log("Job Create");
+  res.send("Job Create");
 };
 
 export const deleteJob = async (req, res) => {
-  console.log("Job delete");
+  res.send("Job delete");
 };
 
 export const updateJob = async (req, res) => {
-  console.log("Job update");
+  res.send("Job update");
 };
 
 export const getAllJob = async (req, res) => {
-  console.log("Get All Jobs");
+  res.send("Get All Jobs");
 };
 
 export const showState = async (req, res) => {
-  console.log("Show States");
+  res.send("Show States");
 };
