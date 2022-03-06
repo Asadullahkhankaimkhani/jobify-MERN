@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
-
+import "express-async-errors";
 // Middleware
 import errorHandleMiddleware from "./middleware/error-handling.js";
 import notFoundMiddleware from "./middleware/not-found.js";
