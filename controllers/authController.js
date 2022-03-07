@@ -9,7 +9,7 @@ export const register = async (req, res) => {
     throw new BadRequestError("Please provide all values");
   }
 
-  const alreadyExistedUser = await User.findOne({ email: email }).exec();
+  const alreadyExistedUser = await User.findOne({ email }).exec();
   if (alreadyExistedUser) {
     throw new BadRequestError("Email Already Registered");
   }
