@@ -31,6 +31,12 @@ const userSchema = mongoose.Schema({
     maxlength: 20,
     default: "LastName",
   },
+  location: {
+    type: String,
+    trim: true,
+    maxlength: 20,
+    default: "",
+  },
 });
 
 userSchema.pre("save", async function () {
