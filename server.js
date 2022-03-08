@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import "express-async-errors";
+import cors from "cors";
 // Middleware
 import errorHandleMiddleware from "./middleware/error-handling.js";
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -17,6 +18,7 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan("dev"));
 
 app.get("/", (req, res) => {
