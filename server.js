@@ -2,7 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import "express-async-errors";
-import cors from "cors";
+// import cors from "cors";
 // Middleware
 import errorHandleMiddleware from "./middleware/error-handling.js";
 import notFoundMiddleware from "./middleware/not-found.js";
@@ -18,9 +18,10 @@ dotenv.config();
 const app = express();
 
 app.use(express.json());
-app.use(cors());
-app.use(morgan("dev"));
-
+// app.use(cors());
+if (process.env.NODE_ENV !== "production") {
+  app.use(morgan("dev"));
+}
 app.get("/", (req, res) => {
   res.send("Welcome Express");
 });
@@ -36,7 +37,6 @@ app.use(notFoundMiddleware);
 app.use(errorHandleMiddleware);
 
 dbConnection(process.env.MONGO_URL);
-
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
