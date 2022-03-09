@@ -9,14 +9,19 @@ import {
 } from "./actions";
 import reducer from "./reducers";
 
+const user = localStorage.getItem("user");
+const token = localStorage.getItem("token");
+const userLocation = localStorage.getItem("location");
+
 const initialState = {
   isLoading: false,
   showAlert: false,
   alertText: "",
   alertType: "",
-  user: null,
-  token: null,
-  userLocation: "",
+  user: user ? user : null,
+  token: token,
+  userLocation: userLocation ? userLocation : null,
+  jobLocation: userLocation ? userLocation : null,
 };
 
 const AppContext = createContext();
@@ -35,6 +40,17 @@ const AppProvider = ({ children }) => {
     }, 3000);
   };
 
+  const addToLocalStorage = ({ user, token, location }) => {
+    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("token", token);
+    localStorage.setItem("location", location);
+  };
+
+  const removeToLocalStorage = () => {
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("location");
+  };
   const registerUser = async (currentUser) => {
     dispatch({ type: REGISTER_USER_BEGIN });
     try {
@@ -44,6 +60,7 @@ const AppProvider = ({ children }) => {
         type: REGISTER_USER_SUCCESS,
         payload: { user, token, location },
       });
+      addToLocalStorage({ user, token, location });
     } catch (err) {
       // console.log(err);
       // console.log(err.message);
