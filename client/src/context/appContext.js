@@ -1,4 +1,5 @@
 import { useContext, useReducer, createContext } from "react";
+import axios from "axios";
 import {
   CLEAR_ALERT,
   DISPLAY_ALERT,
@@ -35,7 +36,23 @@ const AppProvider = ({ children }) => {
   };
 
   const registerUser = async (currentUser) => {
-    console.log(currentUser);
+    dispatch({ type: REGISTER_USER_BEGIN });
+    try {
+      const { data } = await axios.post("/api/v1/auth/register", currentUser);
+      const { user, token, location } = data;
+      dispatch({
+        type: REGISTER_USER_SUCCESS,
+        payload: { user, token, location },
+      });
+    } catch (err) {
+      console.log(err);
+      console.log(err.message);
+      dispatch({
+        type: REGISTER_USER_ERROR,
+        payload: { msg: err.response.data.msg },
+      });
+    }
+    clearAlert();
   };
 
   return (
