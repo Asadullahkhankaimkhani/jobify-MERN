@@ -45,8 +45,8 @@ const AppProvider = ({ children }) => {
         payload: { user, token, location },
       });
     } catch (err) {
-      console.log(err);
-      console.log(err.message);
+      // console.log(err);
+      // console.log(err.message);
       dispatch({
         type: REGISTER_USER_ERROR,
         payload: { msg: err.response.data.msg },
