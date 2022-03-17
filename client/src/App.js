@@ -1,11 +1,23 @@
 import { Route, Routes } from "react-router-dom";
 
 import { Landing, Error, Register } from "./pages";
+import {
+  AllJobs,
+  AddJob,
+  Stats,
+  Profile,
+  SharedLayout,
+} from "./pages/dashboard";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<h1>Dashboard</h1>} />
+      <Route path="/" element={<SharedLayout />}>
+        <Route path="add-job" element={<AddJob />} />
+        <Route path="all-jobs" element={<AllJobs />} />
+        <Route index element={<Stats />} />
+        <Route path="add-job" element={<Profile />} />
+      </Route>
       <Route path="/register" element={<Register />} />
       <Route path="/landing" element={<Landing />} />
       <Route path="*" element={<Error />} />
